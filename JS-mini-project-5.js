@@ -248,3 +248,60 @@ function resetGame(){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let mydocument = document.documentElement;
+let fs = document.querySelector("#fs");
+
+fs.addEventListener("click", fullscreen);
+document.addEventListener("fullscreenchange", updateButtonText);
+
+function fullscreen() {
+    if (fs.textContent == "Go Full Screen") {
+        if (mydocument.requestFullscreen) {
+            mydocument.requestFullscreen();
+        } else if (mydocument.msRequestFullscreen) {
+            mydocument.msRequestFullscreen();
+        } else if (mydocument.mozRequestFullScreen) {
+            mydocument.mozRequestFullScreen();
+        } else if (mydocument.webkitRequestFullscreen) {
+            mydocument.webkitRequestFullscreen();
+        }
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        }
+    }
+}
+
+function updateButtonText() {
+    if (document.fullscreenElement) {
+        fs.textContent = "Exit Full Screen";
+    } else {
+        fs.textContent = "Go Full Screen";
+    }
+}
